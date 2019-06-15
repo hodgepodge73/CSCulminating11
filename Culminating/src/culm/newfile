@@ -1,0 +1,307 @@
+/*public boolean movearr[][] = new boolean[4][3];
+    public void moves(int y , int x, boolean color){ //blue true 
+       //0,1,2,3,
+        
+        // 0 - down right (y+1, x+1) +1 = true -1 = flase  [directoin vert][horz]
+        // 1 - down left (y+1, x-1)
+        // 2 - up right (y-1, x+1)
+        // 3 - up left (y-1, x-1)
+        movearr[0][0] = dr(y,x,color);
+        movearr[0][1] = true;
+        movearr[0][2] = true;
+        
+        movearr[1][0] = dl(y,x,color);
+        movearr[1][1] = true;
+        movearr[1][2] = false;
+        
+        movearr[2][0] = ur(y,x,color);
+        movearr[2][1] = false;
+        movearr[2][2] = true;
+        
+        movearr[3][0] = ul(y,x,color);
+        movearr[1][1] = false;
+        movearr[1][2] = false;
+        
+    }
+    public boolean dr(int y, int x, boolean color){
+        boolean cando = false;
+        if (y < 7 && x < 7){
+            if (pt[y+1][x+1][0]){
+                if (pt[y+1][x+1][1] && color){ //is blue and blue is dr
+                    cando = false;
+                }
+                else if (pt[y+1][x+1][2] && !color){ // is orng and orange is dr
+                    cando = false;
+                }
+                else if (pt[y+1][x+1][1] && !color && !(pt[y+2][x+2][1]||pt[y+2][x+2][2]) && x<6 && y<6){ //is orange next blue and empty
+                    cando = true;
+                    capture = true;
+                }
+                else if (pt[y+1][x+1][2] && color && x<6 && y<6 && !(pt[y+2][x+2][1]||pt[y+2][x+2][2])){ //is blue dr orng and emptydr
+                    cando = true;
+                    capture = true;
+                   
+                }
+            }
+            else if (!pt[y+1][x+1][1] && color){ //no piece there and is blue
+                cando = true; 
+            }
+            else if (!pt[y+1][x+1][2] && pt[y][x][3] && !color){ //no piece there and is orange (not king)
+                cando = true; 
+            }
+            
+        }
+        return cando;
+    }
+    public boolean dl(int y, int x, boolean color){
+       boolean cando = false;
+        if (y < 7 && x > 0 && x < 8){
+            if (pt[y+1][x-1][0]){
+                if (pt[y+1][x-1][1] && color){ //is blue and blue is dr
+                    cando = false;
+                }
+                else if (pt[y+1][x-1][2] && !color){ // is orng and orange is dr
+                    cando = false;
+                }
+                else if (pt[y+1][x-1][1] && !color && !(pt[y+2][x-2][1]||pt[y+2][x-2][2]) && x>1 && y<6){ //is orange next blue and empty
+                    cando = true;
+                    capture = true;
+                }
+                else if (pt[y+1][x-1][2] && color && x>1 && y<6 && !(pt[y+2][x-2][1]||pt[y+2][x-2][2])){ //is blue dr orng and emptydr
+                    cando = true;
+                    capture = true;
+                   
+                }
+            }
+            else if (!pt[y+1][x-1][1] && color){ //no piece there and is blue
+                cando = true; 
+            }
+            else if (!pt[y+1][x-1][2] && pt[y][x][3] && !color){ //no piece there and is orange (not king)
+                cando = true; 
+            }
+            
+        }
+        return cando;     
+    }
+    public boolean ur(int y, int x, boolean color){
+          boolean cando = false;
+        if (y > 0 && x < 7){
+            if (pt[y-1][x+1][0]){
+                if (pt[y-1][x+1][1] && color){ //is blue and blue is dr
+                    cando = false;
+                }
+                else if (pt[y-1][x+1][2] && !color){ // is orng and orange is dr
+                    cando = false;
+                }
+                else if (pt[y-1][x+1][1] && !color && !(pt[y-2][x+2][1]||pt[y-2][x+2][2]) && x<6 && y>1){ //is orange next blue and empty
+                    cando = true;
+                    capture = true;
+                }
+                else if (pt[y-1][x+1][2] && color && x<6 && y>1 && !(pt[y-2][x+2][1]||pt[y-2][x+2][2])){ //is blue dr orng and emptydr
+                    cando = true;
+                    capture = true;
+                   
+                }
+            }
+            else if (!pt[y-1][x+1][2] && color){ //no piece there and is blue
+                cando = true; 
+            }
+            else if (!pt[y-1][x+1][1] && pt[y][x][3] && !color){ //no piece there and is orange (not king)
+                cando = true; 
+            }
+            
+        }
+        return cando;     
+    }
+    public boolean ul(int y, int x, boolean color){
+        boolean cando = false;
+        if (y > 0&& y < 8 && x > 0 && x < 8){
+            if (pt[y-1][x-1][0]){
+                if (pt[y+1][x-1][1] && color){ //is blue and blue is dr
+                    cando = false;
+                }
+                else if (pt[y-1][x-1][2] && !color){ // is orng and orange is dr
+                    cando = false;
+                }
+                else if (pt[y-1][x-1][1] && !color && !(pt[y-2][x-2][1]||pt[y-2][x-2][2]) && x>1 && y>1){ //is orange next blue and empty
+                    cando = true;
+                    capture = true;
+                }
+                else if (pt[y-1][x-1][2] && color && x>0 && y>0 && !(pt[y-2][x-2][1]||pt[y-2][x-2][2])){ //is blue dr orng and emptydr
+                    cando = true;
+                    capture = true;
+                   
+                }
+            }
+            else if (!pt[y-1][x-1][2] && color){ //no piece there and is orng
+                cando = true; 
+            }
+            else if (!pt[y-1][x-1][1] && pt[y][x][3] && !color){ //no piece there and is orange (not king)
+                cando = true; 
+            }
+            
+        }
+        return cando;       
+    }
+    
+}*/
+
+
+        
+        /* boolean val = !false;
+        if (pt[firsty][firstx][0]){//BLUE
+           if (x<7&&y<7) {
+               if(!pt[y+1][x+1][0] && !pt[y+1][x+1][1]){
+                   //buttons[row+1][col+1].setText("o");
+                    val = false;
+                    capture = false;
+                } 
+               else if (pt[y+1][x+1][1]&&!(pt[y+2][x+2][1]||pt[y+2][x+2][0])){
+                            val = true;
+                            capture = true;
+                        }
+               
+               else {
+                   val=true;
+               }
+               if (x<6&&y<6){
+                        if (pt[y+1][x+1][1]&&!pt[y+2][x+2][1]){
+                            val = false;
+                            capture = true;
+                        }
+                        
+                
+               }
+                
+           }
+           if (x>0&&y<7&&val){
+                if (!pt[y+1][x-1][0]) {
+                    
+                    val = false;
+                }
+                else {val=true;}
+                if(x>1&&y<6) {   
+                    if (pt[y+1][x-1][1]&&!pt[y+2][x-2][1]){
+                       // buttons[row+1][col-1].setText("CAPTURE");
+                       capture = true; 
+                       val = false;
+                    }
+                    else if (pt[y+1][x-1][1]&&(pt[y+2][x-2][1]||pt[y+2][x-2][0])) {val = true;capture = true;}
+                }
+                
+           }
+           
+        }
+        else if (pt[y][x][1]){ //ORNG
+           if (x>0&&y>0){
+                if (!pt[y-1][x-1][1]&!pt[y-1][x-1][0]) {
+                  //  buttons[row-1][col-1].setText("o");
+                    val = false; 
+                }
+                else if (pt[y-1][x-1][0]&&(pt[y-2][x-2][0]||pt[y-2][x-2][1])) {
+                    val = true;
+                    capture = false;
+                    }
+                else {val=true;}
+                if(x>1 && y > 1 && !val){
+                    if (pt[y-1][x-1][0]&&!pt[y-2][x-2][0]){
+                        val = false;
+                        capture = true;
+                    }
+                   
+                } 
+                
+           }
+           if (x<7&&y>0 && val){
+                if (!pt[y-1][x+1][1]) {
+                   // buttons[row-1][col+1].setText("o");
+                    val = false;
+                }
+                else {val=true;}
+                if (x<6&&y>1){
+                    if (pt[y-1][x+1][0]&&!pt[y-2][x+2][0]){
+                        val = false;
+                        capture = true;
+                    }
+                    else if (pt[y-1][x+1][0]&&(pt[y-2][x+2][0]||pt[y-2][x+2][1])) {
+                        val =true;
+                        capture = false;
+                    }
+                }
+                
+               
+           }
+        }*/
+
+        /* for (int y =0; y<8; y++){
+                    for (int x =0; x<8; x++){
+                    if ((clickedfirstX!=-1)&&(clickedfirstY!=-1)&&!check123(clickedfirstX,clickedfirstY)&&(clickedfirstX==y-1||clickedfirstX==y+1)&&(clickedfirstY==x-1||clickedfirstY==x+1)&&buttons[y][x].equals(ae.getSource())){
+                        if (pt[clickedfirstX][clickedfirstY][1]){
+                            System.out.print(clickedfirstX+clickedfirstY);
+                            check123(y, x);
+                             
+                             if (capture == true){
+                                 int diff[] = {y-clickedfirstX, x-clickedfirstY}; 
+                                 
+                                  buttons[y][x].setIcon(null);
+                                  pt[y][x][0] = false;
+                                  buttons[clickedfirstX][clickedfirstY].setIcon(null);
+                                  buttons[(y+diff[0])][(x+diff[1])].setIcon(new ImageIcon(ORANGE));
+                                  pt[(y+diff[0])][(x+diff[1])][1] = true;
+                                  repaint();
+
+                             }
+                             else if(!capture)   {
+                                 buttons[y][x].setIcon(null);
+                                buttons[clickedfirstX][clickedfirstY].setIcon(null);
+                                buttons[y][x].setIcon(new ImageIcon(ORANGE));
+                                repaint();
+                                pt[y][x][1] = true;
+                             
+                             }
+                             pt[clickedfirstX][clickedfirstY][1] = false;
+                             
+                             clickedfirstX=-1;
+                             clickedfirstY=-1;
+                             
+                        }
+                        else if (pt[clickedfirstX][clickedfirstY][0]){
+                            
+                            buttons[clickedfirstX][clickedfirstY].setIcon(null);
+                            check123(y, x);
+                            
+                             if (capture == true){
+                                   int diff[] = {y-clickedfirstX, x-clickedfirstY}; 
+                                 
+                                 buttons[y][x].setIcon(null);
+                                  pt[y][x][1] = false;
+                                  buttons[clickedfirstX][clickedfirstY].setIcon(null);
+                                  buttons[(y+diff[0])][(x+diff[1])].setIcon(new ImageIcon(BLUE));
+                                  pt[(y+diff[0])][(x+diff[1])][0] = true;
+                                  repaint();
+                             }
+                            else if(!capture)   {
+                                 buttons[y][x].setIcon(null);
+                                buttons[clickedfirstX][clickedfirstY].setIcon(null);
+                                
+                                buttons[y][x].setIcon(new ImageIcon(BLUE));
+                                repaint();
+                                pt[y][x][0] = true;
+                             
+                             }
+                             
+                             
+                             pt[clickedfirstX][clickedfirstY][0] = false;
+                             
+                             clickedfirstX=-1;
+                             clickedfirstY=-1;
+                        }
+                        
+                        capture=false;
+                    }
+                  
+
+                    }}   */   
+
+// pane.add(compsToExperiment, BorderLayout.NORTH);
+       // pane.add(new JSeparator(), BorderLayout.CENTER);
